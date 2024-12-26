@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package features;
+
+service FeaturesService {
+    rpc GetUserFeatures (UserRequest) returns (UserFeaturesResponse);
+    rpc GetItemFeatures (ItemRequest) returns (ItemFeaturesResponse);
+    rpc GetInteractions (InteractionsRequest) returns (InteractionsResponse);
+}
+
+message UserRequest {
+    string user_id = 1;
+}
+
+message ItemRequest {
+    string item_id = 1;
+}
+
+message InteractionsRequest {
+    string user_id = 1;
+}
+
+message UserFeaturesResponse {
+    string user_id = 1;
+    map<string, string> features = 2;
+}
+
+message ItemFeaturesResponse {
+    string item_id = 1;
+    map<string, string> features = 2;
+}
+
+message Interaction {
+    string user_id = 1;
+    string item_id = 2;
+    string interaction_type = 3;
+    string timestamp = 4;
+}
+
+message InteractionsResponse {
+    repeated Interaction interactions = 1;
+}
